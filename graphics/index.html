@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <style>
-      @import url("https://fonts.googleapis.com/css?family=Lato:300,400|Poppins:300,400,800&display=swap");
+      @import url("https://fonts.googleapis.com/css?family=Lato:300,400|Poppins:300,400,800|Quicksand:wght@300;400;700&display=swap");
       * {
         margin: 0;
         padding: 0;
@@ -17,15 +17,11 @@
       .container {
         width: 100%;
         height: 100vh;
-        /* background: #232323; */
         display: flex;
         justify-content: start;
         align-items: end;
       }
-      .lower-third-animation {
-        animation: lowerThird 1s forwards;
-        animation-delay: 8s;
-      }
+
       .box {
         width: fit-content;
         height: auto;
@@ -34,7 +30,10 @@
         justify-content: center;
         flex-direction: column;
         padding: 30px 40px;
-        background: #232323;
+        background: rgba(56, 58, 104, 0.98);
+        border-top-right-radius: 20px;
+        border-right: 1px solid #ffcc98;
+        border-top: 1px solid #ffcc98;
       }
       .title {
         width: 100%;
@@ -43,32 +42,14 @@
         align-items: center;
         height: 50px;
       }
-      .title .block {
-        width: 0%;
-        height: inherit;
-        background: #ffb510;
-        position: absolute;
 
-        display: flex;
-      }
-      .title-block-animation {
-        animation: mainBlock 2s cubic-bezier(0.74, 0.06, 0.4, 0.92) forwards;
-      }
       .title h1 {
-        font-family: "Poppins";
-        color: #fff;
+        font-family: "Quicksand", sans-serif;
+        color: #ffcc98;
         font-size: 32px;
-        opacity: 0;
         display: flex;
         align-items: baseline;
         position: relative;
-      }
-
-      .title-h1-animation {
-        -webkit-animation: mainFadeIn 2s forwards;
-        -o-animation: mainFadeIn 2s forwards;
-        animation: mainFadeIn 2s forwards;
-        animation-delay: 1.6s;
       }
 
       .role {
@@ -79,81 +60,55 @@
         height: 30px;
         margin-top: -10px;
       }
-      .role .block {
-        width: 0%;
-        height: inherit;
-        background: #e91e63;
-        position: absolute;
-        display: flex;
-      }
-      .role-block-animation {
-        animation: secBlock 2s cubic-bezier(0.74, 0.06, 0.4, 0.92) forwards;
-        animation-delay: 2s;
-      }
+
       .role p {
-        opacity: 0;
         font-weight: 400;
         font-family: "Lato";
-        color: #ffffff;
+        color: #fff7d9;
         font-size: 12px;
         text-transform: uppercase;
         letter-spacing: 5px;
       }
-      .role-p-animation {
-        animation: secFadeIn 2s forwards;
-        animation-delay: 3.2s;
+
+      .lineUp {
+        animation: 2s anim-lineUp ease-out forwards;
+      }
+      @keyframes anim-lineUp {
+        0% {
+          opacity: 0;
+          transform: translateY(80%);
+        }
+        20% {
+          opacity: 0;
+        }
+        50% {
+          opacity: 1;
+          transform: translateY(0%);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0%);
+        }
       }
 
-      @keyframes mainBlock {
-        0% {
-          width: 0%;
-          left: 0;
-        }
-        50% {
-          width: 100%;
-          left: 0;
-        }
-        100% {
-          width: 0;
-          left: 100%;
-        }
+      .lineUp-role {
+        animation: 5s anim-lineUp ease-out forwards;
       }
-      @keyframes secBlock {
-        0% {
-          width: 0%;
-          left: 0;
-        }
-        50% {
-          width: 100%;
-          left: 0;
-        }
-        100% {
-          width: 0;
-          left: 100%;
-        }
-      }
-      @keyframes mainFadeIn {
+      @keyframes anim-lineUp {
         0% {
           opacity: 0;
+          transform: translateY(80%);
+        }
+        20% {
+          opacity: 0;
+        }
+        50% {
+          opacity: 1;
+          transform: translateY(0%);
         }
         100% {
           opacity: 1;
-        }
-      }
-      @keyframes secFadeIn {
-        0% {
-          opacity: 0;
-        }
-        100% {
-          opacity: 0.5;
-        }
-      }
-      @keyframes lowerThird {
-        0% {
-          opacity: 1;
-        }
-        100% {
-          opacity: 0;
+          transform: translateY(0%);
         }
       }
     </style>
@@ -163,23 +118,29 @@
       <div class="box">
         <div class="title">
           <span class="block title-block-animation" id="blokki"></span>
-          <h1 class="title-h1-animation" id="puhuja">Ulla Sederlöf</h1>
+          <h1 class="lineUp" id="puhuja">Ida Olsson Vilhunen</h1>
         </div>
 
         <div class="role">
           <div class="block role-block-animation" id="tokablokki"></div>
-          <p class="role-p-animation" id="rooli">UX Dev designer</p>
+          <p class="lineUp-role" id="rooli">UX Dev designer</p>
         </div>
       </div>
     </div>
 
     <script>
       const speakerRep = nodecg.Replicant("speakerReplicant");
+      const titleRep = nodecg.Replicant("titleReplicant");
       const puhuja = document.getElementById("puhuja");
+      const rooli = document.getElementById("rooli");
 
       speakerRep.on("change", (newValue, oldValue) => {
         console.log(`myRep changed from ${oldValue} to ${newValue}`);
         puhuja.innerHTML = newValue;
+      });
+      titleRep.on("change", (newValue, oldValue) => {
+        console.log(`myRep changed from ${oldValue} to ${newValue}`);
+        rooli.innerHTML = newValue;
       });
     </script>
   </body>

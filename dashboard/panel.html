@@ -14,21 +14,38 @@
       <input type="text" id="speaker" />
       <button type="submit">Vaihda nimeä</button>
     </form>
+    <form id="speakerTitleForm">
+      <label for="title">Puhujan titteli</label>
+      <input type="text" id="title" />
+      <button type="submit">Vaihda titteliä</button>
+    </form>
 
     <script>
       const speakerRep = nodecg.Replicant("speakerReplicant");
       const speaker = document.getElementById("speaker");
+      const titleRep = nodecg.Replicant("titleReplicant");
+      const title = document.getElementById("title");
 
       speakerRep.on("change", (newValue, oldValue) => {
         console.log(`myRep changed from ${oldValue} to ${newValue}`);
         speaker.value = newValue;
       });
+      titleRep.on("change", (newValue, oldValue) => {
+        console.log(`myRep changed from ${oldValue} to ${newValue}`);
+        title.value = newValue;
+      });
 
       const speakerForm = document.getElementById("speakerForm");
+      const speakerTitleForm = document.getElementById("speakerTitleForm");
 
       speakerForm.addEventListener("submit", (e) => {
         e.preventDefault;
         speakerRep.value = speaker.value;
+      });
+
+      speakerTitleForm.addEventListener("submit", (e) => {
+        e.preventDefault;
+        titleRep.value = title.value;
       });
     </script>
   </body>
