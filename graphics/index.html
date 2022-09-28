@@ -73,6 +73,7 @@
       .lineUp {
         animation: 2s anim-lineUp ease-out forwards;
       }
+
       @keyframes anim-lineUp {
         0% {
           opacity: 0;
@@ -133,15 +134,37 @@
       const titleRep = nodecg.Replicant("titleReplicant");
       const puhuja = document.getElementById("puhuja");
       const rooli = document.getElementById("rooli");
+      const blokki = document.getElementById("blokki");
+      const tokablokki = document.getElementById("tokablokki");
 
       speakerRep.on("change", (newValue, oldValue) => {
         console.log(`myRep changed from ${oldValue} to ${newValue}`);
         puhuja.innerHTML = newValue;
+        animations();
       });
       titleRep.on("change", (newValue, oldValue) => {
         console.log(`myRep changed from ${oldValue} to ${newValue}`);
         rooli.innerHTML = newValue;
+        animations();
       });
+
+      function animations() {
+        blokki.classList.remove("title-block-animation");
+        blokki.offsetWidth;
+        blokki.classList.add("title-block-animation");
+
+        puhuja.classList.remove("lineUp");
+        puhuja.offsetWidth;
+        puhuja.classList.add("lineUp");
+
+        tokablokki.classList.remove("role-block-animation");
+        tokablokki.offsetWidth;
+        tokablokki.classList.add("role-block-animation");
+
+        rooli.classList.remove("lineUp-role");
+        rooli.offsetWidth;
+        rooli.classList.add("lineUp-role");
+      }
     </script>
   </body>
 </html>
